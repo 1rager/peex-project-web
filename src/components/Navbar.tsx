@@ -1,4 +1,6 @@
-import React from "react";
+'use client';
+
+import React, { useState } from "react";
 
 const navLinks = [
   { label: "Início", href: "#" },
@@ -9,24 +11,92 @@ const navLinks = [
   { label: "Contato", href: "#contato" },
 ];
 
+function smoothScrollTo(targetY: number, duration: number = 1200) {
+  const startY = window.scrollY;
+  const diff = targetY - startY;
+  let start: number | null = null;
+
+  function step(timestamp: number) {
+    if (!start) start = timestamp;
+    const elapsed = timestamp - start;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, startY + diff * easeInOutQuad(progress));
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  }
+
+  function easeInOutQuad(t: number) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  window.requestAnimationFrame(step);
+}
+
+function handleSmoothScroll(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string, closeMobile?: () => void) {
+  if (href.startsWith("#") && href.length > 1) {
+    e.preventDefault();
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const scrollTop = window.scrollY || window.pageYOffset;
+      smoothScrollTo(rect.top + scrollTop, 1200);
+      if (closeMobile) closeMobile();
+    }
+  }
+}
+
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="w-full bg-white shadow fixed top-0 left-0 z-50">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <span className="font-bold text-xl text-blue-800">Peex Engenharia</span>
-        <ul className="hidden md:flex gap-8">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className="relative text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 px-1 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-700 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        {/* Mobile menu placeholder */}
+        <div className="flex items-center">
+          <ul className="hidden md:flex gap-8">
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  onClick={e => handleSmoothScroll(e, link.href)}
+                  className="relative text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 px-1 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-blue-700 after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 ml-2 focus:outline-none"
+            aria-label="Abrir menu"
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            <span className={`block w-7 h-1 bg-blue-800 rounded transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`block w-7 h-1 bg-blue-800 rounded my-1 transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-7 h-1 bg-blue-800 rounded transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          </button>
+        </div>
+        {/* Mobile menu stack */}
+        {mobileOpen && (
+          <div className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-start pt-24 md:hidden animate-fade-in">
+            <ul className="bg-white rounded-xl shadow-xl w-11/12 max-w-xs py-6 flex flex-col gap-6 text-center">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="block text-xl font-semibold text-blue-800 py-2 px-4 rounded hover:bg-blue-50 transition-colors duration-200"
+                    onClick={e => handleSmoothScroll(e, link.href, () => setMobileOpen(false))}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </nav>
     </header>
   );

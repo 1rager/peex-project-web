@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useRef, useEffect } from "react";
 
@@ -35,12 +33,14 @@ export default function ParallaxSection() {
         style={{ transition: 'transform 0.5s linear' }}
       />
       <div className="relative z-10 w-full flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
-          Engenharia de Excelência para Multinacionais
-        </h1>
-        <p className="text-lg md:text-2xl max-w-2xl mx-auto drop-shadow">
-          Projetos de engenharia mecânica de alta precisão para empresas líderes como Vale, Gerdau, ArcelorMittal e outras gigantes do setor industrial.
-        </p>
+        <div className="inline-block bg-black/70 rounded-xl px-6 py-6 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-2xl text-white tracking-tight">
+            Engenharia de excelência para multinacionais
+          </h1>
+          <p className="text-xl md:text-3xl max-w-2xl mx-auto drop-shadow-lg text-white font-medium">
+            Projetos de engenharia mecânica de alta precisão para empresas líderes como Vale, Gerdau, ArcelorMittal e outras gigantes do setor industrial.
+          </p>
+        </div>
       </div>
     </section>
   );
