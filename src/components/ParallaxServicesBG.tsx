@@ -23,8 +23,8 @@ export default function ParallaxServicesBG({ children }: { children: React.React
     <div ref={sectionRef} className="relative w-full min-h-[60vh] flex items-stretch overflow-hidden">
       <video
         ref={videoRef}
-        className="absolute top-0 left-0 min-w-full min-h-full w-auto h-auto object-cover object-center opacity-70 m-0 p-0 will-change-transform scale-[1.55]"
-        src="/videos/paralax2.mp4"
+  className="absolute top-0 left-0 min-w-full min-h-full w-auto h-auto object-cover object-center opacity-70 m-0 p-0 will-change-transform scale-[1.55]"
+  src="https://videos.pexels.com/video-files/4457865/4457865-uhd_2560_1440_24fps.mp4"
         autoPlay
         loop
         muted

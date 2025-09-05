@@ -25,8 +25,8 @@ export default function ParallaxSection() {
     <section ref={sectionRef} className="relative w-full min-h-[100vh] flex items-stretch overflow-hidden bg-transparent">
       <video
         ref={videoRef}
-        className="absolute top-0 left-0 min-w-full min-h-full w-auto h-auto object-cover object-center opacity-70 m-0 p-0 will-change-transform scale-[1.85]"
-        src="/videos/paralax1.mp4"
+  className="absolute top-0 left-0 min-w-full min-h-full w-auto h-auto object-cover object-center opacity-70 m-0 p-0 will-change-transform scale-[1.85]"
+  src="https://videos.pexels.com/video-files/9310130/9310130-uhd_2560_1440_30fps.mp4"
         autoPlay
         loop
         muted
