@@ -84,20 +84,34 @@ export default function Navbar() {
         </div>
         {/* Mobile menu stack */}
         {mobileOpen && (
-          <div className="fixed inset-0 bg-black/60 z-50 flex flex-col items-center justify-start pt-24 md:hidden animate-fade-in">
-            <ul className="bg-white rounded-xl shadow-xl w-11/12 max-w-xs py-6 flex flex-col gap-6 text-center">
-              {navLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="block text-xl font-semibold text-blue-800 py-2 px-4 rounded hover:bg-blue-50 transition-colors duration-200"
-                    onClick={e => handleSmoothScroll(e, link.href, () => setMobileOpen(false))}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div
+            className="fixed inset-0 bg-black/60 z-50 md:hidden"
+            onClick={() => setMobileOpen(false)}
+          >
+            <div
+              className={
+                `fixed top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl flex flex-col pt-24 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`
+              }
+              style={{
+                transform: mobileOpen ? 'translateX(0)' : 'translateX(60px)',
+                opacity: mobileOpen ? 1 : 0
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <ul className="flex flex-col gap-6 text-center px-4">
+                {navLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="block text-xl font-semibold text-blue-800 py-2 px-4 rounded hover:bg-blue-50 transition-colors duration-200"
+                      onClick={e => handleSmoothScroll(e, link.href, () => setMobileOpen(false))}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
       </nav>
