@@ -2,7 +2,7 @@
 
 
 import Navbar from "@/components/Navbar";
-import ParallaxSection from "@/components/ParallaxSection";
+import ParallaxSectionBegin from "@/components/ParallaxSectionBegin";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
   <main>
         <section id="inicio">
-          <ParallaxSection />
+          <ParallaxSectionBegin />
         </section>
         <section id="sobre">
           <AboutSection />

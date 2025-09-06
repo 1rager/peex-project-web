@@ -90,47 +90,55 @@ export default function Navbar() {
           </button>
         </div>
         {/* Mobile menu stack */}
-        {mobileOpen && (
+        <div
+          className={`fixed inset-0 z-50 md:hidden pointer-events-none transition-opacity duration-400 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0'}`}
+          style={{ background: 'rgba(0,0,0,0.60)' }}
+          onClick={() => setMobileOpen(false)}
+        >
           <div
-            className="fixed inset-0 bg-black/60 z-50 md:hidden"
-            onClick={() => setMobileOpen(false)}
+            className={
+              `fixed top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl flex flex-col pt-24 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`
+            }
+            style={{
+              transform: mobileOpen ? 'translateX(0)' : 'translateX(60px)',
+              opacity: mobileOpen ? 1 : 0
+            }}
+            onClick={e => e.stopPropagation()}
           >
-            <div
-              className={
-                `fixed top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl flex flex-col pt-24 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`
-              }
-              style={{
-                transform: mobileOpen ? 'translateX(0)' : 'translateX(60px)',
-                opacity: mobileOpen ? 1 : 0
-              }}
-              onClick={e => e.stopPropagation()}
+            {/* Botão de fechar */}
+            <button
+              className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-2xl text-blue-800 shadow focus:outline-none transition-colors duration-200"
+              aria-label="Fechar menu"
+              onClick={() => setMobileOpen(false)}
+              type="button"
             >
-              <ul className="flex flex-col gap-6 text-center px-4">
-                {navLinks.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="block text-xl font-semibold text-blue-800 py-2 px-4 rounded hover:bg-blue-50 transition-colors duration-200"
-                      onClick={e => {
-                        if (link.href === "#") {
-                          e.preventDefault();
-                          setMobileOpen(false);
-                          setTimeout(() => {
-                            smoothScrollTo(0, 1200);
-                          }, 10);
-                        } else {
-                          handleSmoothScroll(e, link.href, () => setMobileOpen(false));
-                        }
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              &times;
+            </button>
+            <ul className="flex flex-col gap-6 text-center px-4 mt-8">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="block text-xl font-semibold text-blue-800 py-2 px-4 rounded hover:bg-blue-50 transition-colors duration-200"
+                    onClick={e => {
+                      if (link.href === "#") {
+                        e.preventDefault();
+                        setMobileOpen(false);
+                        setTimeout(() => {
+                          smoothScrollTo(0, 1200);
+                        }, 10);
+                      } else {
+                        handleSmoothScroll(e, link.href, () => setMobileOpen(false));
+                      }
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
