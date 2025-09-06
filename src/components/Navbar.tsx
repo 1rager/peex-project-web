@@ -53,7 +53,10 @@ export default function Navbar() {
   return (
     <header className="w-full bg-white shadow fixed top-0 left-0 z-50">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <span className="font-bold text-xl text-blue-800">Peex Engenharia</span>
+        <span className="flex flex-col items-center justify-center">
+          <span className="font-extrabold text-2xl md:text-3xl tracking-widest text-blue-800 leading-none uppercase">PEEX</span>
+          <span className="text-xs md:text-sm text-blue-900 font-medium tracking-wide mt-1 text-center" style={{letterSpacing: '0.08em'}}>Projetos de engenharia</span>
+        </span>
         <div className="flex items-center">
           <ul className="hidden md:flex gap-8">
             {navLinks.map((link) => (

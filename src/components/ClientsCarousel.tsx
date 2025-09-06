@@ -44,10 +44,10 @@ export default function ClientsCarousel() {
         >
           {logos.map((client, idx) => {
             // Ajuste de tamanho especial para Odebrecht, Vallourec, Votorantim, ThyssenKrupp
-            let imgClass = "h-20 w-auto object-contain mb-2 grayscale hover:grayscale-0 transition duration-300";
+            let imgClass = "h-20 w-auto object-contain mb-2 grayscale hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:scale-105";
             let imgStyle = { maxWidth: 180, background: "transparent" };
             if (["Odebrecht", "Vallourec", "Votorantim", "ThyssenKrupp"].includes(client.name)) {
-              imgClass = "h-28 w-auto object-contain mb-2 grayscale hover:grayscale-0 transition duration-300";
+              imgClass = "h-28 w-auto object-contain mb-2 grayscale hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:scale-105";
               imgStyle = { maxWidth: 260, background: "transparent" };
             }
             return (

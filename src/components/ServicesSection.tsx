@@ -38,7 +38,7 @@ export default function ServicesSection() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className="bg-white/90 rounded-xl shadow-md p-8 flex flex-col items-center text-center hover:shadow-xl transition-shadow"
+                className="bg-white/90 rounded-xl shadow-md p-8 flex flex-col items-center text-center hover:shadow-xl transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform hover:-translate-y-2 hover:scale-105"
               >
                 <div className="text-5xl mb-4">{service.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>

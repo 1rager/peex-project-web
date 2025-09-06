@@ -30,7 +30,7 @@ export default function ProjectsSection() {
           {projects.map((project) => (
             <div
               key={project.title}
-              className="rounded-xl shadow-md bg-gray-50 overflow-hidden hover:shadow-xl transition-shadow"
+              className="rounded-xl shadow-md bg-gray-50 overflow-hidden hover:shadow-xl transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] transform hover:-translate-y-2 hover:scale-105"
             >
               <img
                 src={project.image}
